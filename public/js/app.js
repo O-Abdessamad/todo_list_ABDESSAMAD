@@ -48,4 +48,11 @@ document.addEventListener("click", element =>{
     }
 })
 
-
+//Modifier Element
+document.addEventListener("click", element =>{
+    if (element.target.className.includes("update")) {
+        element.target.parentElement.parentElement.classList.toggle("edit");
+        let pro = prompt(`Modifier la valeur de : ${element.target.parentElement.previousElementSibling.textContent}`);
+        element.target.parentElement.previousElementSibling.textContent = pro;
+    }
+})
