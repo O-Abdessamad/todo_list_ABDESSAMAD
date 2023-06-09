@@ -40,3 +40,12 @@ btn_add.addEventListener("click",(element)=>{
     input_text.value = "";
 })
 
+//Valider
+document.addEventListener("click", element =>{
+    if (element.target.className.includes("verif")) {
+        element.target.parentElement.parentElement.classList.toggle("green");
+        console.log(element.target.parentElement.parentElement);
+    }
+})
+
+
