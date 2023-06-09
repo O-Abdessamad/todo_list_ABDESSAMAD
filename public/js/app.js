@@ -2,8 +2,11 @@
 let input_text = document.querySelector(".input_text");
 let btn_add = document.querySelector(".btn_add");
 let emplacement = document.querySelector(".emplacement ");
-console.log(emplacement);
 
+// les tableaux
+let boit_element=[];
+let boit_elementV=[];
+let boit_elementS=[];
 btn_add.addEventListener("click",(element)=>{
 
     // cration des element
@@ -16,35 +19,37 @@ btn_add.addEventListener("click",(element)=>{
         //creation de p
         let p = document.createElement("p");
         p.textContent = input_text.value;
+        boit_element.push(p.textContent);
+        console.log(p.textContent);
         h3.appendChild(p);
         //creation de icon
         let icon = document.createElement("i");
-        icon.innerHTML = '<i class="fa-solid verif fa-check" value="done" style="color: #42f312;"></i> <i class="fa-solid update fa-pen-to-square" ></i>';
+        icon.innerHTML = '<i class="fa-solid verif fa-check" value="done" style="color: #42f312;"></i> <i class="fa-solid update fa-pen-to-square" ></i> <i class="fa-regular sup fa-circle-xmark"></i>';
         
-        h3.appendChild(icon);
-        //creation de X
-        let spane = document.createElement("span");
-        spane.innerHTML = "x";
-        h3.appendChild(spane);
+        h3.appendChild(icon);       
     }
-    // suprition des elements
-    let X = document.querySelectorAll("span");
     
-    for (let i = 0; i < X.length; i++) {
-        X[i].addEventListener("click", ()=>{
-            X[i].parentNode.remove();
-            
-        })
-    }
-    //
     input_text.value = "";
 })
+
+//Suprition des elements
+document.addEventListener("click", element =>{
+    if (element.target.className.includes("sup")) {
+        let contenuS=element.target.parentElement.parentElement.textContent;
+        contenuS=contenuS.slice(0, contenuS.length-1);
+        boit_elementS.push(contenuS);
+        console.log(boit_elementS);
+        element.target.parentElement.parentElement.remove();
+    }
 
 //Valider
 document.addEventListener("click", element =>{
     if (element.target.className.includes("verif")) {
+        let contenuV=element.target.parentElement.parentElement.textContent;
+        contenuV=contenuV.slice(0, contenuV.length-1);
         element.target.parentElement.parentElement.classList.toggle("green");
-        console.log(element.target.parentElement.parentElement);
+        
+
     }
 })
 
@@ -53,6 +58,21 @@ document.addEventListener("click", element =>{
     if (element.target.className.includes("update")) {
         element.target.parentElement.parentElement.classList.toggle("edit");
         let pro = prompt(`Modifier la valeur de : ${element.target.parentElement.previousElementSibling.textContent}`);
-        element.target.parentElement.previousElementSibling.textContent = pro;
+
+        if (pro.length==0) {
+            element.target.parentElement.previousElementSibling.textContent = element.target.parentElement.previousElementSibling.textContent;
+
+            
+        }else{
+            console.log(pro.length);
+            element.target.parentElement.previousElementSibling.textContent = pro;
+        }
+
+        
     }
 })
+
+
+})
+
+
