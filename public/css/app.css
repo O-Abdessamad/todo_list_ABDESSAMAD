@@ -1,0 +1,10 @@
+.h3_dsplay{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+.green{
+    background-color: green;
+    color: white;
+}
